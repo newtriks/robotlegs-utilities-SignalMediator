@@ -1,41 +1,30 @@
-package org.robotlegs.mvcs
-{
+package org.robotlegs.mvcs {
 
-	import org.robotlegs.mvcs.Mediator;
-	import org.osflash.signals.ISignal;
-	import org.robotlegs.core.ISignalMap;
+import net.richardlord.signals.SignalBase;
 
-	public class SignalMediator extends Mediator
-	{
+import org.robotlegs.core.ISignalMap;
 
-		protected var _signalMap:ISignalMap;
-	
-		public function SignalMediator()
-		{
-			super();
-		}
-	
-		override public function preRemove():void
-		{
-			signalMap.removeAll();
-			super.preRemove();
-		}
-	
-		protected function get signalMap():ISignalMap
-		{
-			return _signalMap ||= new SignalMap();
-		}
-	
-		protected function addToSignal(signal:ISignal, handler:Function):void
-		{
-			signalMap.addToSignal(signal, handler);
-		} 
-		
-		protected function addOnceToSignal(signal:ISignal, handler:Function):void
-		{
-			signalMap.addOnceToSignal(signal, handler);
-		}
-	
-	}           
+public class SignalMediator extends Mediator {
+
+    protected var _signalMap:ISignalMap;
+
+    public function SignalMediator() {
+        super();
+    }
+
+    override public function preRemove():void {
+        signalMap.removeAll();
+        super.preRemove();
+    }
+
+    protected function get signalMap():ISignalMap {
+        return _signalMap ||= new SignalMap();
+    }
+
+    protected function addToSignal(signal:SignalBase, handler:Function):void {
+        signalMap.addToSignal(signal, handler);
+    }
+
+}
 
 }
